@@ -1,6 +1,6 @@
 const { setWorldConstructor } = require('@cucumber/cucumber');
 const { chromium } = require('@playwright/test');
-const { PageObjectManager } = require('../../pageObjects/PageObjectManager');
+const { PageObjectManager } = require('../pageObjects/PageObjectManager');
 
 // CustomWorld Class
 // Purpose: Creates a shared container for all test data and resources

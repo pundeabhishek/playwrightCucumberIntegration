@@ -3,13 +3,14 @@ module.exports = {
     // Files to load before running tests
     // Order matters: world first, then hooks, then step definitions
     require: [
-      'features/support/world.js',        // World class - shared context container
-      'features/support/hooks.js',        // Hooks - Before, After, BeforeStep, AfterStep
-      'features/stepDefinations/*.js'     // Step definitions - Given, When, Then implementations
+      'support/world.js',        // World class - shared context container
+      'support/hooks.js',        // Hooks - Before, After, BeforeStep, AfterStep
+      'stepDefinations/*.js'     // Step definitions - Given, When, Then implementations
     ],
 
     // Path to feature files - where test scenarios are written
-    paths: ['features/*.feature'],
+    // Removed paths here to allow command line to override
+    // If no feature file specified on command line, it will run all features/*.feature files
 
     // Report format - what kind of output to generate
     // 'html' creates beautiful HTML reports
@@ -103,13 +104,25 @@ module.exports = {
     stepDefinitionSyntax: 'JS'  // JavaScript syntax
   },
 
+  parameters: {
+    // Run only ParameterExamples tests
+    require: [
+      'support/world.js',
+      'support/hooks.js',
+      'stepDefinations/*.js'
+    ],
+    format: ['html:html-report/parameters-report.html', 'progress-bar'],
+    paths: ['features/ParameterExamples.feature'],
+    timeout: '60s'
+  },
+
   // You can define multiple profiles for different environments
   smoke: {
     // Run only smoke tests
     require: [
       'features/support/world.js',
       'features/support/hooks.js',
-      'features/stepDefinations/*.js'
+      'stepDefinations/*.js'
     ],
     format: ['html:html-report/smoke-report.html'],
     paths: ['features/*.feature'],
